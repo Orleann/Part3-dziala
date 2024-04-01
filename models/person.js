@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
-const url = 'mongodb+srv://fullstackopen:oPR3vbDHFEa1APns@fullstack.jui31ts.mongodb.net/?retryWrites=true&w=majority&appName=Fullstack'
+const url = 'mongodb+srv://sebussobczynski:Dfc3x3iOa4FIkorc@phonebook.j508e9k.mongodb.net/?retryWrites=true&w=majority&appName=Phonebook'
 
 mongoose.connect(url)
   .then(result => {

@@ -1,27 +1,31 @@
 {
-  "name": "fullstackopen-part3",
+  "name": "part3",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "build:ui": "rm -rf build && cd ../FullStackOpen-Part2/phonebook/ && npm run build && cp -r build ../../FullStackOpen-Part3",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+    "build:ui": "rm -rf build && cd ../part2/phonebook && npm run build --prod && cp -r build ../../part3",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Misiu-52/fullstack.git"
+  },
+  "private": true,
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.1.4",
-    "express": "^4.18.2",
-    "mongoose": "^7.2.2",
-    "morgan": "^1.10.0"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1",
+    "mongoose": "^8.2.2",
+    "mongoose-unique-validator": "^5.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0"
   },
   "devDependencies": {
-    "eslint": "^8.42.0",
-    "nodemon": "^3.1.0"
+    "eslint": "^8.57.0"
   }
 }

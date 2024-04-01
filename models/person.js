@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
-mongoose.set('strictQuery', false)
-const url = process.env.MONGODB_URI
-console.log('connecting to', url)
-mongoose
-  .connect(url)
-  .then((result) => {
+const uniqueValidator = require('mongoose-unique-validator')
+
+const url = 'mongodb+srv://fullstackopen:oPR3vbDHFEa1APns@fullstack.jui31ts.mongodb.net/?retryWrites=true&w=majority&appName=Fullstack'
+
+mongoose.connect(url)
+  .then(result => {
     console.log('connected to MongoDB')
   })
-  .catch((error) => {
-    console.log('error connecting to MongoDB:', error.message)
+  .catch(error => {
+    console.log('error connecting to MongoDB', error.message)
   })
 
 const personSchema = new mongoose.Schema({
@@ -16,24 +16,23 @@ const personSchema = new mongoose.Schema({
     type: String,
     minLength: 3,
     required: true,
-    unique: [true, 'Name is required'],
+    unique: true,
   },
   number: {
     type: String,
-    minLength: [8, 'Phone number must be at least 8 characters long'],
-    validate: {
-      validator: (v) => /(^\d{2}[-]\d{6,}$)|(^\d{3}[-]\d{5,}$)/.test(v),
-      message: (props) =>
-        `${props.value} not a valid phone number. Use one of following formats: xx-xxxxxx or xxx-xxxxx`,
-    },
-    required: [true, 'Phone number is required'],
+    minLength: 8,
+    required: true,
   },
 })
+
 personSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
-  },
+  }
 })
+
+personSchema.plugin(uniqueValidator)
+
 module.exports = mongoose.model('Person', personSchema)
